@@ -3,9 +3,9 @@ import numpy as np
 import os
 import re
 
-imgPath = '/media/aether/My Passport/Medical Images Data/VESSEL12 Lungs/VESSEL12_02_clip/'
-maskPath = '/home/aether/Desktop/Medical Image Segmentation/lung_unet_model/unet4_fullImgs_preds/'
-croppedPath = 'VESSEL12_02_cropped/'
+imgPath = '/home/aether/Desktop/Medical Image Segmentation/lung_unet_model/Lung_CT/test/images/VESSEL12_02_png/'
+maskPath = '/home/aether/Desktop/Medical Image Segmentation/lung_unet_model/Lung_CT/test/ground_truth/VESSEL12_02_png/'
+croppedPath = 'VESSEL12_02_perfect_cropped/'
 
 if not os.path.exists(croppedPath):
     os.makedirs(croppedPath)

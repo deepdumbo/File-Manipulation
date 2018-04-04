@@ -4,6 +4,7 @@ import numpy as np
 import os
 from matplotlib import pyplot as plt
 from PIL import Image
+import warnings
 
 def tryint(c):
 	try:
@@ -19,16 +20,16 @@ def alphanum_key(s):
 def natural_sort(list):
 	list.sort(key=alphanum_key)
 
-def ThreshImages(dir, save_dir):
+def thresh_images(dir, save_dir):
 	if not os.path.exists(save_dir):
 		os.makedirs(save_dir)
 	for filename in os.listdir(dir):
 		print filename
 
 		img_arr = skio.imread(dir + filename)[:,:,:3]
-		print img_arr.shape
-		print(np.max(img_arr))
-		print(np.min(img_arr))
+		# print img_arr.shape
+		# print(np.max(img_arr))
+		# print(np.min(img_arr))
 
 		# ------- Make white/black ----------
 		img_arr[img_arr > 0] = 255
@@ -43,10 +44,12 @@ def ThreshImages(dir, save_dir):
 
 		# skio.imshow(img_arr)
 		# skio.show()
-		skio.imsave(save_dir + filename, img_arr)
+		with warnings.catch_warnings():
+			warnings.simplefilter("ignore")
+			skio.imsave(save_dir + filename, img_arr)
 		# break
 
 
-
-ThreshImages("/media/aether/My Passport/Medical Images Data/Kaggle Finding and Measuring Lungs in CT Data/bleh/"
-			, "/media/aether/My Passport/Medical Images Data/Kaggle Finding and Measuring Lungs in CT Data/blehs/")
+for i in range(3, 131):
+	thresh_images("/media/aether/My Passport/Medical Images Data/LITS - Liver Tumor Segmentation (perfect)/train_ground_truth_tumor/segmentation" + str(i) + "/"
+			, "/media/aether/My Passport/Medical Images Data/LITS - Liver Tumor Segmentation (perfect)/train_ground_truth_binary/segmentation" + str(i) + "/")
